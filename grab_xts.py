@@ -38,7 +38,7 @@ os.makedirs(SAVE_DIR, exist_ok=True)
 
 
 def get_folder_id(folder_name):
-    folders_url = f"{GRAPH_ENDPOINT}/users/{sh_mailbox}/mailFolders?$top=100"
+    folders_url = f"{GRAPH_ENDPOINT}/users/{cfg.sh_mailbox}/mailFolders?$top=100"
     folders_resp = requests.get(folders_url, headers=headers)
     if folders_resp.status_code == 200:
         for folder in folders_resp.json().get('value', []):
@@ -67,7 +67,7 @@ def fetch_and_save_wosd_pdfs(folder_name, save_folder=None, start_str=None, end_
         save_folder = os.path.expanduser("~/Downloads/Hapag_XTs")
 
     messages_url = (
-        f"{GRAPH_ENDPOINT}/users/{SHARED_MAILBOX}/mailFolders/{folder_id}/messages"
+        f"{GRAPH_ENDPOINT}/users/{cfg.sh_mailbox}/mailFolders/{folder_id}/messages"
         f"?$filter=receivedDateTime ge {start_str} and receivedDateTime le {end_str}"
         f"&$top=100&$orderby=receivedDateTime desc"
     )
@@ -87,7 +87,7 @@ def fetch_and_save_wosd_pdfs(folder_name, save_folder=None, start_str=None, end_
                 continue
             msg_seen += 1
             msg_id = msg['id']
-            att_url = f"{GRAPH_ENDPOINT}/users/{SHARED_MAILBOX}/messages/{msg_id}/attachments"
+            att_url = f"{GRAPH_ENDPOINT}/users/{cfg.sh_mailbox}/messages/{msg_id}/attachments"
             att_resp = requests.get(att_url, headers=headers)
             if att_resp.status_code != 200:
                 print(f"Failed to fetch attachments for message {msg_id}")
