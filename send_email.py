@@ -13,7 +13,7 @@ EMAIL_HOST = "imap.gmail.com"
 SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 587
 EMAIL_USER = "niko.business08@gmail.com"
-EMAIL_PASSWORD = "hqgm ayuk nudd ijpq"
+EMAIL_PASSWORD = "EMAIL_PASS"
 REPORT_RECIPIENTS = ["ntsakiridis@whimsytrucking.com"]
 
 date_today = (datetime.now() - timedelta(days=vars.days_back)).strftime("%m-%d-%Y")  # date of today in MM/DD/YYYY format
